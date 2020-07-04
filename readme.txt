@@ -1,0 +1,5 @@
+Encoder PB4,PB5
+PWM PD12
+PD13 DIR
+PA2 : RX
+PA3 : TX
