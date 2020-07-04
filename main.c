@@ -28,14 +28,14 @@ int main(void)
 		ENC_config(TIM3,GPIOB,GPIO_Pin_4,GPIO_Pin_5); // Thay GPIOA-> GPIOB, GPIO_Pin_4,GPIO_Pin_5
 		PWM_Pin();
 		PWM_configOUT(20000); //20Khz
-		PID_Init1(0.3,0.00,0);	
+		PID_Init1(1,0.00,0);	
 	/* Enable SysTick at 1ms interrupt */
 		SysTick_Config(SystemCoreClock/1000);
 	while(1)
 		{
 			if(on)  //Start 
 			{
-				PID_Calculate1(220);
+				PID_Calculate1(-220);
 			}
 			else  // Stop
 			{

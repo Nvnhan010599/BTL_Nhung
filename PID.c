@@ -58,9 +58,18 @@ void PID_Calculate1(float Vd_1) // Vd_1 RPM
 	motor1.ek_1 = motor1.ek;
 	int period = 0;
 	get_period(&period);
-	uk1 = (float)motor1.uk*period/100;
-//
-	if(uk1 > 90) uk1 = 90;
+	uk1 = fabs((float)motor1.uk*period/100);
+	if(uk1 > 90) uk1 = 90; // Saturation
+	
+	if(Vd_1 >= 0)
+	{
+		GPIOD->BSRRH |= 1<<13; // OFF
+	}
+	else
+	{
+		GPIOD->BSRRL |= 1<<13;  // ON
+	}
+	
 		TIM_SetCompare1(TIM4,uk1);
 	
 }

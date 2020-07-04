@@ -17,7 +17,15 @@ void PWM_Pin(void)
 	GPIO_Init(GPIOD, &pwm_out);
 	
 	GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_TIM4); // xuat PWM
-
+	
+	GPIO_InitTypeDef dir;
+	dir.GPIO_Pin = GPIO_Pin_13;
+	dir.GPIO_Mode = GPIO_Mode_OUT;
+	dir.GPIO_OType = GPIO_OType_PP;
+	dir.GPIO_PuPd = GPIO_PuPd_DOWN;
+	dir.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOD,&dir);
+	
 
 }
 uint32_t period = 0 ;
@@ -27,7 +35,7 @@ void PWM_configOUT(float freq)
 {	RCC_ClocksTypeDef RCC_Clocks;
 	RCC_GetClocksFreq(&RCC_Clocks);
 //RCC_Clocks.HCLK_Frequency
-	prescale = RCC_Clocks.HCLK_Frequency/2/500000 - 1;
+	prescale = RCC_Clocks.HCLK_Frequency/2/2000000 - 1;
 	period = RCC_Clocks.HCLK_Frequency/2/((prescale + 1)*freq) - 1 ;
 //RCC_Clocks.HCLK_Frequency/2/((prescale + 1)*1000) - 1 ;
 
