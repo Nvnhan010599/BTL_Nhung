@@ -25,7 +25,7 @@ int main(void)
 		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);
 		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4,ENABLE);
 	
-		ENC_config(TIM3,GPIOA,GPIO_Pin_6,GPIO_Pin_7); // Thay GPIOA-> GPIOB, GPIO_Pin_4,GPIO_Pin_5
+		ENC_config(TIM3,GPIOB,GPIO_Pin_4,GPIO_Pin_5); // Thay GPIOA-> GPIOB, GPIO_Pin_4,GPIO_Pin_5
 		PWM_Pin();
 		PWM_configOUT(20000); //20Khz
 		PID_Init1(0.3,0.00,0);	
@@ -33,12 +33,11 @@ int main(void)
 		SysTick_Config(SystemCoreClock/1000);
 	while(1)
 		{
-			//TIM_SetCompare1(TIM4,30);
-			if(on)
+			if(on)  //Start 
 			{
 				PID_Calculate1(220);
 			}
-			else
+			else  // Stop
 			{
 				Restart_PID1();
 				TIM_SetCompare1(TIM4,0);
@@ -58,7 +57,7 @@ int main(void)
 				V = V_1Ts(v1);
 				flag_10ms = 0;
 			}
-			if(flag_100ms == 100)
+			if(flag_100ms == 100) // Truyen nhan UART
 			{
 				
 				flag_100ms = 0;

@@ -19,8 +19,8 @@ void ENC_config(TIM_TypeDef* TIMx,GPIO_TypeDef* GPIOx,uint16_t A_GPIO_Pin_x,uint
 
 	GPIO_Init(GPIOx, &enc);
 
-	GPIO_PinAFConfig(GPIOx, GPIO_PinSource6, GPIO_AF_TIM3);  //GPIO_PinSource4
-	GPIO_PinAFConfig(GPIOx, GPIO_PinSource7, GPIO_AF_TIM3);  //GPIO_PinSource5
+	GPIO_PinAFConfig(GPIOx, GPIO_PinSource4, GPIO_AF_TIM3);  //GPIO_PinSource4
+	GPIO_PinAFConfig(GPIOx, GPIO_PinSource4, GPIO_AF_TIM3);  //GPIO_PinSource5
 
 	TIM_TimeBaseInitTypeDef tim_enc;
 	tim_enc.TIM_ClockDivision = TIM_CKD_DIV1;
